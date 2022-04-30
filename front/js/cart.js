@@ -28,6 +28,17 @@ var  validAdress = "";
 var  validMail = "";
 
 console.log(Cart);
+/** vérifier que le panier n'est pas vide*/
+async function verifiePanier(){
+  if(Cart !== null){
+    panierAchat();
+  }else{
+    var Form = document.querySelector("form");
+    Form.hidden = true;
+    console.log(Form);
+  }
+};
+
 /**afficher les produits dans le panier (innerHTML) */
 async function panierAchat(){
   Cart.forEach((iD) =>{console.log(iD._id);
@@ -64,13 +75,15 @@ async function panierAchat(){
       </article>`;
       selectTotal();
       buttonsIdPanieradd();
-      buttonsDeleteProd(); 
+      buttonsDeleteProd()
+     
   })
   
   
   .catch (function(err){
-      return err;
+      return console.log(err);
   });
+  
 });
 };
 
@@ -146,7 +159,8 @@ async function deleteProduct(){
 
 /** somme totale des articles et calcul du total à payer*/
 async function selectTotal(){
-   totalQuantity.innerText = `${totalArticles}`;
+ 
+  totalQuantity.innerText = `${totalArticles}`;
   totalPrice.innerText = `${totalPrix}`;
 };
 
@@ -289,10 +303,10 @@ async function postOrder(){
     })
 };
 
+verifiePanier();
 addressEmail();
 addressVille();
 addressOrder();
 lastnameForm();
 firstnameForm();
 btnComand();
-panierAchat();
